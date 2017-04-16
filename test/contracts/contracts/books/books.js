@@ -28,8 +28,9 @@ describe('Routes Books', () => {
 	describe('Route GET /books', () => {
 		it('shoud return a list of books', done => {
 			const bookslist = Joi.array().items(Joi.object().keys({
-				id: Joi.string(),
+				_id: Joi.string(),
 				name: Joi.string(),
+				__v: Joi.number(),
 			}));
 
 			request
@@ -44,8 +45,9 @@ describe('Routes Books', () => {
 	describe('Route GET /books/{id}', () => {
 		it('shoud return a book', done => {
 			const book = Joi.object().keys({
-				id: Joi.string(),
+				_id: Joi.string(),
 				name: Joi.string(),
+				__v: Joi.number(),
 			});
 
 			request
@@ -59,16 +61,21 @@ describe('Routes Books', () => {
 
 	describe('Route POST /books', () => {
 		it('shoud create a book', done => {
-			const book = Joi.object().keys({
-				id: Joi.string(),
+			const bookSchema = Joi.object().keys({
+				_id: Joi.string(),
 				name: Joi.string(),
+				__v: Joi.number()
 			});
+
+			const newBook = {
+				name: "newBook"
+			} ;
 
 			request
 				.post('/books')
 				.send(newBook)
 				.end((err, res) => {
-					JoiAssert(res.body, book);
+					JoiAssert(res.body, bookSchema);
 					done(err);
 				});
 		});
@@ -77,9 +84,14 @@ describe('Routes Books', () => {
 	describe('Route PUT /books/{id}', () => {
 		it('shoud update a book', done => {
 			const book = Joi.object().keys({
-				id: Joi.string(),
+				_id: Joi.string(),
 				name: Joi.string(),
+				__v: Joi.number()
 			});
+
+			const updatedBook = {
+				name: "updatedBook name"
+			};
 
 			request
 				.put('/books/'+defaultBookId)
