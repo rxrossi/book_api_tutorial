@@ -3,7 +3,8 @@ import Books from '../../../../src/models/Book';
 describe('Routes Books', () => {
 
 	const defaultBook = {
-		name: 'Default Book'
+		name: 'Default Book',
+		description: 'Default Description'
 	}
 	let defaultBookId; // will receive the value bellow
 
@@ -30,6 +31,7 @@ describe('Routes Books', () => {
 			const bookslist = Joi.array().items(Joi.object().keys({
 				_id: Joi.string(),
 				name: Joi.string(),
+				description: Joi.string(),
 				__v: Joi.number(),
 			}));
 
@@ -47,6 +49,7 @@ describe('Routes Books', () => {
 			const book = Joi.object().keys({
 				_id: Joi.string(),
 				name: Joi.string(),
+				description: Joi.string(),
 				__v: Joi.number(),
 			});
 
@@ -64,11 +67,13 @@ describe('Routes Books', () => {
 			const bookSchema = Joi.object().keys({
 				_id: Joi.string(),
 				name: Joi.string(),
+				description: Joi.string(),
 				__v: Joi.number()
 			});
 
 			const newBook = {
-				name: "newBook"
+				name: "newBook",
+				description: 'newBook description',
 			} ;
 
 			request
@@ -86,11 +91,13 @@ describe('Routes Books', () => {
 			const book = Joi.object().keys({
 				_id: Joi.string(),
 				name: Joi.string(),
+				description: Joi.string(),
 				__v: Joi.number()
 			});
 
 			const updatedBook = {
-				name: "updatedBook name"
+				name: "updatedBook name",
+				description: 'updatedBook description',
 			};
 
 			request

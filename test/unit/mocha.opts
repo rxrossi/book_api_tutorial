@@ -1,4 +1,4 @@
 --require test/unit/helpers.js
---reporter min
+--reporter spec
 --compilers js:babel-core/register
 --slow 5000
